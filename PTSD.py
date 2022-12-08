@@ -51,7 +51,7 @@ class GlobalTester(TestCase):
         test_plan = GlobalTester.get_test(name)
         if not test_plan:
             test_plan = GlobalTester.TestPlan(name)
-            setattr(GlobalTester, "test_"+name, test_plan.runTest)
+            setattr(GlobalTester, "test_" + name, test_plan.runTest)
             GlobalTester.test_plans.append(test_plan)
         return test_plan
 
@@ -83,6 +83,9 @@ class GlobalTester(TestCase):
             return staticmethod(func)
 
 
+''' EXAMPLE '''
+
+'''
 class ToTest:
     def __init__(self):
         self.c = 9
@@ -105,9 +108,9 @@ class ToTest:
         @GlobalTester.check("adder")
         def test_adder():
             return [{"input": [3, 5],
-                     "output": 9+3+5},
+                     "output": 9 + 3 + 5},
                     {"input": [1, 1],
-                     "asserting_method": lambda x: x == 1+1+9}]
+                     "asserting_method": lambda x: x == 1 + 1 + 9}]
 
         @GlobalTester.setup("adder_mod")
         def adder_setup() -> "ToTest":
@@ -120,9 +123,10 @@ class ToTest:
             return [{"input": [3, 5],
                      "output": 4 + 3 + 5},
                     {"input": [1, 1],
-                     "asserting_method": lambda x: x == 1 + 1 }]
+                     "asserting_method": lambda x: x == 1 + 1}]
 
 
 if __name__ == '__main__':
     unittest.main()
     # GlobalTester()()
+'''
