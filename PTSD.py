@@ -25,18 +25,18 @@ class GlobalTester(TestCase):
         def __str__(self):
             return self.name
 
-        def test_main(self):
-            for test in self.tests:
-                print("TEST PLAN: ", test.name)
+        def runTest(self):
+            print("-------- TEST PLAN: ", self.name)
+            for idx, test in enumerate(self.tests):
                 instance = self.setup_method()
                 if hasattr(instance, self.method_to_test.__name__):
-                    print("Testing {}({})".format(self.method_to_test.__name__, test["input"]))
+                    print(idx, "-\tTesting {}({})".format(self.method_to_test.__name__, test["input"]))
                     result = self.method_to_test(instance, *test["input"])
                     if "output" in test.keys():
-                        print("expected:", test["output"], "got:", result)
+                        print("\texpected:", test["output"], "got:", result)
                         self.assertEqual(result, test["output"])
                     elif "asserting_method" in test.keys():
-                        print("checking result", result)
+                        print("\tchecking result", result)
                         self.assertTrue(test["asserting_method"](result))
 
     @staticmethod
@@ -51,6 +51,7 @@ class GlobalTester(TestCase):
         test_plan = GlobalTester.get_test(name)
         if not test_plan:
             test_plan = GlobalTester.TestPlan(name)
+            setattr(GlobalTester, "test_"+name, test_plan.runTest)
             GlobalTester.test_plans.append(test_plan)
         return test_plan
 
@@ -80,13 +81,6 @@ class GlobalTester(TestCase):
             for test_plan in self.local_test_plans:
                 test_plan.tie_method(func)
             return staticmethod(func)
-
-    # def __call__(self):
-    #     return [(str(test_plan), test_plan()) for test_plan in self.test_plans]
-
-    def test_all(self):
-        for test in GlobalTester.test_plans:
-            test.test_main()
 
 
 class ToTest:
@@ -131,4 +125,4 @@ class ToTest:
 
 if __name__ == '__main__':
     unittest.main()
-    GlobalTester()()
+    # GlobalTester()()
