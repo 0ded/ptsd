@@ -27,17 +27,20 @@ class GlobalTester(TestCase):
             return self.name
 
         def runTest(self):
-            print("-------- TEST PLAN: ", self.name)
+            print("\n-------- TEST PLAN: {} --------".format(self.name.upper()))
             for idx, test in enumerate(self.tests):
-                instance = self.setup_method()
+                try:
+                    instance = self.setup_method()
+                except TypeError:
+                    instance = self.setup_method(None)
                 if hasattr(instance, self.method_to_test.__name__):
-                    print(idx, "-\tTesting {}({})".format(self.method_to_test.__name__, test["input"]))
+                    print(idx, "-\tTesting {}\n\t\t{}".format(self.method_to_test.__name__, test["input"]))
                     result = self.method_to_test(instance, *test["input"])
                     if "output" in test.keys():
-                        print("\texpected:", test["output"], "got:", result)
+                        print("\t\texpected:", test["output"], "got:", result)
                         self.assertEqual(result, test["output"])
                     elif "asserting_method" in test.keys():
-                        print("\tchecking result", result)
+                        print("\t\tchecking result", result)
                         self.assertTrue(test["asserting_method"](result))
 
     @staticmethod
@@ -69,7 +72,11 @@ class GlobalTester(TestCase):
             self.test_plan = GlobalTester.add_test(name)
 
         def __call__(self, func: callable):
-            for test in func():
+            try:
+                test_dicts = func()
+            except TypeError:
+                test_dicts = func(None)
+            for test in test_dicts:
                 self.test_plan.add_test(test)
 
     class unit(staticmethod):
