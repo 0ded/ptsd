@@ -1,11 +1,7 @@
-# ptsd
+import unittest
+from PTSD import GlobalTester
 
-[![Python application](https://github.com/0ded/ptsd/actions/workflows/python-app.yml/badge.svg?event=check_run)](https://github.com/0ded/ptsd/actions/workflows/python-app.yml)
 
-
-## EXAMPLE 
-
-```
 class ToTest:
     def __init__(self):
         self.c = 9
@@ -43,10 +39,9 @@ class ToTest:
             return [{"input": [3, 5],
                      "output": 4 + 3 + 5},
                     {"input": [1, 1],
-                     "asserting_method": lambda x: x == 1 + 1}]
+                     "asserting_method": lambda x: x == 1 + 1 + 4}]
 
 
 if __name__ == '__main__':
     unittest.main()
     # GlobalTester()()
-```
