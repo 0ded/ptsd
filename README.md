@@ -1,5 +1,8 @@
 # ptsd
 
+[![Python application](https://github.com/0ded/ptsd/actions/workflows/python-app.yml/badge.svg)](https://github.com/0ded/ptsd/actions/workflows/python-app.yml)
+
+
 ## EXAMPLE 
 
 ```
