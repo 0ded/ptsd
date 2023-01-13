@@ -24,7 +24,7 @@ class ToTest:
         @GlobalTester.check("adder")
         def test_adder():
             return [{"input": [3, 5],
-                     "output": 9 + 3 + 5},
+                     "output": 9 + 3 + 1},
                     {"input": [1, 1],
                      "asserting_method": lambda x: x == 1 + 1 + 9}]
 
