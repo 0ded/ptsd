@@ -1,4 +1,4 @@
-# ptsd
+# PTSD - Python Test Suite Decorator
 
 [![Python application](https://github.com/0ded/ptsd/actions/workflows/python-app.yml/badge.svg?event=check_run)](https://github.com/0ded/ptsd/actions/workflows/python-app.yml)
 
