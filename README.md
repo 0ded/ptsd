@@ -2,6 +2,12 @@
 
 [![Python application](https://github.com/0ded/ptsd/actions/workflows/python-app.yml/badge.svg?event=check_run)](https://github.com/0ded/ptsd/actions/workflows/python-app.yml)
 
+A library for writing and runnint basic unit tests in python. 
+
+Tag the function you wish to test with `@GlobalTester.unit("tag name")`
+
+Connect it to a test function using `@GlobalTester.check("tag name")`
+
 
 ## EXAMPLE 
 
